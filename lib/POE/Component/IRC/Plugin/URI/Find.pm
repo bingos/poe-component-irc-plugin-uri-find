@@ -18,7 +18,7 @@ sub new {
 
 sub PCI_register {
   my ($self,$irc) = @_;
-  $irc->plugin_register( $self, 'SERVER', qw(public) );
+  $irc->plugin_register( $self, 'SERVER', qw(public ctcp_action) );
   $self->{session_id} = POE::Session->create(
 	object_states => [ 
 	   $self => [ qw(_shutdown _start _uri_find _uri_found) ],
@@ -39,6 +39,17 @@ sub S_public {
   my $who = ${ $_[0] };
   my $channel = ${ $_[1] }->[0];
   my $what = ${ $_[2] };
+  $poe_kernel->call( $self->{session_id}, '_uri_find', $irc, $who, $channel, $what );
+  return PCI_EAT_NONE;
+}
+
+sub S_ctcp_action {
+  my ($self,$irc) = splice @_, 0, 2;
+  my $who = ${ $_[0] };
+  my $channel = ${ $_[1] }->[0];
+  my $what = ${ $_[2] };
+  my $chantypes = join('', @{ $irc->isupport('CHANTYPES') || ['#', '&']});
+  return PCI_EAT_NONE if $channel !~ /^[$chantypes]/;
   $poe_kernel->call( $self->{session_id}, '_uri_find', $irc, $who, $channel, $what );
   return PCI_EAT_NONE;
 }
