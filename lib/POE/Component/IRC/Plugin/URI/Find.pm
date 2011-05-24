@@ -1,13 +1,12 @@
 package POE::Component::IRC::Plugin::URI::Find;
 
+#ABSTRACT: A POE::Component::IRC plugin that finds URIs in channel traffic
+
 use strict;
 use warnings;
 use POE;
 use POE::Component::IRC::Plugin qw(:ALL);
 use URI::Find;
-use vars qw($VERSION);
-
-$VERSION = '1.08';
 
 sub new {
   my $package = shift;
@@ -83,12 +82,9 @@ sub _uri_found {
   undef;
 }
 
-1;
-__END__
+q[Find this URL http://cpanidx.org/];
 
-=head1 NAME
-
-POE::Component::IRC::Plugin::URI::Find - A POE::Component::IRC plugin that finds URIs in channel traffic.
+=pod
 
 =head1 SYNOPSIS
 
@@ -176,19 +172,10 @@ With the following parameters:
 
 =back
 
-=head1 AUTHOR
-
-Chris 'BinGOs' Williams
-
-=head1 LICENSE
-
-Copyright E<copy> Chris Williams.
-
-This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
-
 =head1 SEE ALSO
 
 L<POE::Component::IRC>
 
 L<URI::Find>
 
+=cut
