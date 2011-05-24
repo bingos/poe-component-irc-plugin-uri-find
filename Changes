@@ -1,6 +1,8 @@
 POE::Component::IRC::Plugin::URI::Find
 ======================================
 
+	- Also catch URIs in CTCP ACTION messages
+
 1.08	Fri Apr 17 23:22:30 BST 2009
 	- Import to git repo
 	- Bump to stable release
