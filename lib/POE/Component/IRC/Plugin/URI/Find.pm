@@ -86,6 +86,15 @@ q[Find this URL http://cpanidx.org/];
 
 =pod
 
+=begin Pod::Coverage
+
+ PCI_register
+ PCI_unregister
+ S_public
+ S_ctcp_action
+
+=end Pod::Coverage
+
 =head1 SYNOPSIS
 
   use strict;
